@@ -1,0 +1,21 @@
+.network-list{
+    width: 100%;
+    height: 81vh;
+    border: 2px solid black;
+   
+    overflow-y: scroll;
+}
+.list{
+    list-style-type: none;
+}
+.container-fluid{
+    
+     padding: 0;
+     top:50px;
+     left: 0;
+     position: sticky !important;
+  }
+  .networkhead{
+    height: 50px;
+    background-color: #ECF2FF;
+  }
