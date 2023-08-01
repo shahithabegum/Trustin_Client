@@ -1,19 +1,43 @@
 import React from 'react'
 import { useFormik } from "formik";
 import { Col, Row } from "react-bootstrap";
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import { authservice } from "../../service/AuthService";
+import {toast} from 'react-toastify'
+import { login } from "../../service/Auth";
 import './login.css'
 const Login = () => {
+  let navigate = useNavigate()
     const formik =useFormik({
         initialValues:{
           email:'',
           password:''
         },
         // validationSchema:loginValidation,
-        onSubmit:(values)=>{
+        onSubmit:(values,{resetForm})=>{
           console.log(values)
-        }
+          handleSubmit(values)
+          resetForm();
+    
+      }
       })
+      const handleSubmit =(values)=>{
+        login(values).then(response=>{
+          console.log(response.data)
+          if(response.data.isSuccess==="true"){
+            navigate('/commonlayout/landingpage')
+            authservice.setAuthToken(response.data.result.token)
+                authservice.setCurrentUser(response.data.result.ExistingUser)
+            toast.success(response.data.message)
+          }
+          else{
+            toast.error(response.data.message)
+          }
+        })
+      }
+      if(!authservice.isAuthenticated){
+        navigate('/login')
+      }
       return (
         <div className="logincontainer">
           <h1 className="text-center log-h1 ">Welcome To TrustIn</h1>
@@ -27,7 +51,7 @@ const Login = () => {
                     <input
                    
                       type="email"
-                      class="form-control login-input"
+                      className="form-control login-input"
                       id="email"
                       name="emailid"
                       placeholder="Enter Mail Id"
@@ -46,7 +70,7 @@ const Login = () => {
                     <label for="password" className="label my-2">Password</label>
                     <input 
                       type="password"
-                      class="form-control login-input"
+                      className="form-control login-input"
                       id="password"
                       placeholder="Enter Password"
                       {...formik.getFieldProps("password")}
@@ -59,10 +83,10 @@ const Login = () => {
               </Row>
               <Row lg={2} md={1} sm={1} className="mb-3 ">
                 <Col lg={6} md={12} sm={12} className="d-flex">
-                  <p to="/" className="link "> forget password?</p>
+                  <Link to="/forgetpassword" className="link "> forget password?</Link>
                 </Col>
                 <Col lg={6} md={12} sm={12} className="d-flex">
-                  <p className="link "> If your a new user signup </p>
+                  <Link to="/" className="link "> If your a new user signup </Link>
                 </Col>
               </Row>
               <Row>

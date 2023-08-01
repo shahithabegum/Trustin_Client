@@ -1,7 +1,7 @@
 .logincontainer{
     height: 100vh;
     width: 100%;
-   background-image: url("../../assets/01e80267f63bce9fcae94e29bf3acfd3.jpg");
+   background-image: url("../../assets/images\ \(4\).jpg");
    background-position: center;
    background-repeat: no-repeat;
    background-size:100% 100%; 
@@ -25,7 +25,8 @@ box-shadow: 3px 3px 24px 16px rgba(214,199,214,1);
 
 }
 .login-input{
-    background: none !important;
+    
+    background:lightcyan !important;
     border: 2px solid rgb(255, 250, 250);
 }
 .label{

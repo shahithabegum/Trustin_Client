@@ -1,21 +1,40 @@
 import React from 'react'
 import { Col, Row } from "react-bootstrap";
 import { useFormik } from "formik";
+import { forget_Password } from "../../service/Auth";
+import { useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify'
 const Forgotpassword = () => {
-    const formik =useFormik({
-        initialValues:{
-          email:'',
-          password:''
-        },
-        // validationSchema:loginValidation,
-        onSubmit:(values)=>{
-          console.log(values)
+  let navigate = useNavigate()
+  const formik = useFormik({
+      initialValues: {
+        email: ""
+      },
+     
+      onSubmit:(values,{resetForm})=>{
+        console.log(values)
+        handleSubmit(values)
+        resetForm();
+  
+    }
+    });
+  
+    const handleSubmit =(values)=>{
+      forget_Password(values).then(res=>{
+        console.log(res.data)
+        if(res.data.isSuccess==="true"){
+          navigate('/resetpassword')
+          toast.success(res.data.message)
+        }
+        else{
+          toast.error(res.data.message)
         }
       })
+    }
     return(
         <div className="logincontainer">
         <h1 className="text-center log-h1 ">Forget Password</h1>
-        <div className="formcontainer container my-5">
+        <div className="formcontainer  my-5">
           <form className="form" onSubmit={formik.handleSubmit} >
             <Row className='my-2'>
               <Col  >
@@ -26,7 +45,7 @@ const Forgotpassword = () => {
                     type="email"
                     class="form-control login-input"
                     id="email"
-                    name="emailid"
+                    name="email"
                     placeholder="Enter Mail Id"
                     {...formik.getFieldProps("email")}
                   />
