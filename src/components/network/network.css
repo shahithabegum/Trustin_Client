@@ -1,12 +1,13 @@
 .network-list{
     width: 100%;
     height: 81vh;
-    border: 2px solid black;
+   
    
     overflow-y: scroll;
 }
 .list{
     list-style-type: none;
+    padding: 0%;
 }
 .container-fluid{
     
@@ -18,4 +19,8 @@
   .networkhead{
     height: 50px;
     background-color: #ECF2FF;
+  }
+  .connectionlist{
+    
+    border-bottom: 1px solid lavender;
   }

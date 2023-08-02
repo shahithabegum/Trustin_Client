@@ -17,7 +17,7 @@
 .profileimg{
     width: 20%!important;
     max-height: 20% !important;
-    top: 45%;
+    top: 47%;
     left: 55%;
     position: absolute;
 }
@@ -26,9 +26,8 @@
 
 }
 .dp{
-    
-    
-    width: 40%!important;
+    height: 40%;
+    width: 50%!important;
     border-radius: 50% !important;
     
 }

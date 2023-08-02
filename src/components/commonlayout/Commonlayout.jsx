@@ -1,8 +1,8 @@
 import React from 'react'
 import Network from '../network/Network'
 import Topbar from '../Nav/Topbar'
-import Landing from '../landing/Landing'
 import './common.css'
+import { Outlet } from 'react-router-dom'
 const Commonlayout = () => {
   return (
     <div><div className='main'>
@@ -14,7 +14,7 @@ const Commonlayout = () => {
      <Network />
   </div>
   <div className='other'>
-  <Landing />
+  <Outlet />
   </div>
   
  </div>

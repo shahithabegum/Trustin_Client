@@ -36,7 +36,7 @@ const Login = () => {
         })
       }
       if(!authservice.isAuthenticated){
-        navigate('/login')
+        navigate('/')
       }
       return (
         <div className="logincontainer">
@@ -86,7 +86,7 @@ const Login = () => {
                   <Link to="/forgetpassword" className="link "> forget password?</Link>
                 </Col>
                 <Col lg={6} md={12} sm={12} className="d-flex">
-                  <Link to="/" className="link "> If your a new user signup </Link>
+                  <Link to="/signup" className="link "> If your a new user signup </Link>
                 </Col>
               </Row>
               <Row>
