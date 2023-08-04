@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { reset_password } from "../../service/Auth";
 import { useNavigate ,useSearchParams} from "react-router-dom";
 import {toast} from 'react-toastify'
+
 const Resetpassword = () => {
   let navigate = useNavigate()
   let [searchParams,setSearchParams] = useSearchParams();
@@ -13,7 +14,6 @@ const Resetpassword = () => {
           password: "",
           token:token
         },
-       
         onSubmit:values=>{
           console.log(values)
           handleSubmit(values)
@@ -34,6 +34,7 @@ const Resetpassword = () => {
           }
         })
       }
+      const enable =formik.values.password !==""
     return(
         <div className="logincontainer">
         <h1 className="text-center log-h1 ">Reset Your Password</h1>
@@ -59,7 +60,7 @@ const Resetpassword = () => {
         
             <Row className='mt-5'>
             <Col >
-                <button className="btn  btn-primary " >Reset</button>
+                <button className="btn  btn-primary " disabled={!enable}>Reset</button>
               </Col>
             </Row>
           </form>

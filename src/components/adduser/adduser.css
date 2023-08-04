@@ -37,6 +37,7 @@
     text-align: center;
     align-items: center;
     padding: 10px 0;
+    cursor: pointer;
 }
 .searchlist:hover{
     background-color: rgb(205, 236, 247);

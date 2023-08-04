@@ -1,0 +1,9 @@
+.connnect_list{
+    cursor: pointer;
+    width: 100%;
+    height: max-content;
+    align-items: center;
+}
+.connnect_list:hover{
+   background: rgb(239, 239, 248);
+}

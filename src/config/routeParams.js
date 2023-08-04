@@ -3,11 +3,13 @@ import Forgotpassword from '../components/log/Forgotpassword'
 import Resetpassword from '../components/log/Resetpassword'
 import Commonlayout from '../components/commonlayout/Commonlayout'
 import Landing from '../components/landing/Landing'
-import Signup from '../components/log/Signup'
 import CreateCompany from '../components/company/CreateCompany'
 import EditCompany from '../components/company/EditCompany'
-import Editprofile from '../components/log/Editprofile'
 import Adduser from '../components/adduser/Adduser'
+import Connect from '../components/connect/Connect'
+import Signup from '../profile/Signup'
+import Editprofile from '../profile/Editprofile'
+import ChangePassword from '../profile/ChangePassword'
 export const pathroute=[
     {
       path:'/',
@@ -52,6 +54,14 @@ export const pathroute=[
       {
         path:"/commonlayout/adduser",
         DynComponent:Adduser
+      }, 
+      {
+        path:"/commonlayout/connect",
+        DynComponent:Connect
+      },  
+      {
+        path:"/commonlayout/password",
+        DynComponent:ChangePassword
       },  
     ]
 },

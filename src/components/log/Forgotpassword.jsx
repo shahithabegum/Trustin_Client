@@ -10,7 +10,6 @@ const Forgotpassword = () => {
       initialValues: {
         email: ""
       },
-     
       onSubmit:(values,{resetForm})=>{
         console.log(values)
         handleSubmit(values)
@@ -31,6 +30,7 @@ const Forgotpassword = () => {
         }
       })
     }
+    const enable =formik.values.email !==""
     return(
         <div className="logincontainer">
         <h1 className="text-center log-h1 ">Forget Password</h1>
@@ -59,7 +59,7 @@ const Forgotpassword = () => {
         
             <Row className='mt-5'>
             <Col >
-                <button className="btn  btn-primary " >Generate Reset Link</button>
+                <button className="btn  btn-primary " disabled={!enable}>Generate Reset Link</button>
               </Col>
             </Row>
           </form>

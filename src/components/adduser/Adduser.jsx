@@ -7,8 +7,10 @@ import {getAll_user} from '../../service/UserService'
 import {toast} from 'react-toastify'
 import { authservice } from '../../service/AuthService';
 import './adduser.css'
+import { generateNotification } from '../../service/Notification';
 const Adduser = () => {
   let navigate = useNavigate()
+  const user = authservice.getCurrentUser()
   const Authuser=authservice.getCurrentCompany()
   const [useremail, setUseremail] = useState('')
   const [company, setCompany] = useState([])
@@ -19,11 +21,13 @@ const Adduser = () => {
   const formik =useFormik({
     initialValues:{
       companyname:Authuser.companyname,
-      companyemail:Authuser.companyemail,
+      companywebsite:Authuser.companywebsite,
       companylocation:Authuser.companylocation,
-      profileimgae:Authuser.profileimgae
+      profileimgae:Authuser.profileimgae, 
+      message:`${user.username} Added a Company`,
+      type:"2"
     },
-    // validationSchema:loginValidation,
+  
     onSubmit:(values,{resetForm})=>{
       // console.log(values)
       handleSubmit()
@@ -35,7 +39,8 @@ const Adduser = () => {
     getAll_user().then((res)=>{
       if(res.data.isSuccess==="true"){
         setDataList(res.data.result)
-        setCompany(res.data.result)
+         setCompany(res.data.result)
+      
       }
       
     })
@@ -44,6 +49,14 @@ const Adduser = () => {
     const data=Object.assign(formik.values,{useremail:useremail})
     create_company(data).then((res)=>{
       if(res.data.isSuccess==="true"){
+
+        generateNotification(data).then((res)=>{
+          if(res.data.isSuccess==="true"){
+            console.log("notification sent",res.data)
+          }
+          
+        })
+    
         navigate('/commonlayout/landingpage')
         toast.success(res.data.message)
       }
@@ -66,6 +79,7 @@ const handlechange =(value) =>{
  fetchdata(value)
 }
 console.log("company",company)
+const enable = useremail !==""
   return (
     <div>
       <h2 className="Companyheader text-center my-4"> Add User To Your Company </h2>
@@ -101,7 +115,7 @@ console.log("company",company)
               </Row>
               <Row className=" mx-2 my-1 justify-content-center" >
                 <Col lg={2} md={6} sm={12} ml={0} >
-                <button className="btn btn-outline-info w-100  my-2" type="submit">Add user</button>
+                <button className="btn btn-outline-info w-100  my-2" type="submit" disabled={!enable}>Add user</button>
                 </Col>
                 <Col lg={2} md={6} sm={12} ml={0} >
                 <button className="btn btn-outline-danger w-100  my-2" type="button" onClick={()=>handleCancel()}>Cancel</button>

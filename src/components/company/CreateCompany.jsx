@@ -5,17 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify'
 import {create_company,upload} from '../../service/CompanyService'
 import './company.css'
+import CompanyValidation from './CompanyValidation';
 const CreateCompany = () => {
   let navigate = useNavigate()
   const [profileimgae, setProfileimgae] = useState('')
   const formik =useFormik({
       initialValues:{
         companyname:'',
-        companyemail:'',
+        companywebsite:'',
         useremail:'',
         companylocation:''
       },
-      // validationSchema:loginValidation,
+       validationSchema:CompanyValidation,
       onSubmit:(values,{resetForm})=>{
         // console.log(values)
         handleSubmit()
@@ -86,17 +87,17 @@ const CreateCompany = () => {
               <Row className='my-2'>
                 <Col>
                   <div class="form-group">
-                    <label for="companyemail" className="label my-2 company-label">Company Mail</label>
+                    <label for="companywebsite" className="label my-2 company-label">Company website</label>
                     <input 
                       type="text"
                       className="form-control "
-                      id="companyemail"
+                      id="companywebsite"
                       placeholder="Enter Company Email"
-                      {...formik.getFieldProps("companyemail")}
+                      {...formik.getFieldProps("companywebsite")}
                     />
                   </div>
-                  {formik.touched.companyemail && formik.errors.companyemail ? (
-                       <p style={{color:"red"}}>{formik.errors.companyemail}</p>
+                  {formik.touched.companywebsite && formik.errors.companywebsite ? (
+                       <p style={{color:"red"}}>{formik.errors.companywebsite}</p>
                       ) : null}
                 </Col>
               </Row>
@@ -146,6 +147,7 @@ const CreateCompany = () => {
                       onChange={(e)=>{handleUpload(e)}}
                     />
                   </div>
+               
                 </Col>
               </Row>
               <Row className=" mx-2 my-1 justify-content-center" >

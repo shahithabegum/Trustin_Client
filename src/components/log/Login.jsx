@@ -6,6 +6,7 @@ import { authservice } from "../../service/AuthService";
 import {toast} from 'react-toastify'
 import { login } from "../../service/Auth";
 import './login.css'
+import LoginValidation from './LoginValidation';
 const Login = () => {
   let navigate = useNavigate()
     const formik =useFormik({
@@ -13,7 +14,7 @@ const Login = () => {
           email:'',
           password:''
         },
-        // validationSchema:loginValidation,
+        validationSchema:LoginValidation,
         onSubmit:(values,{resetForm})=>{
           console.log(values)
           handleSubmit(values)
@@ -24,11 +25,12 @@ const Login = () => {
       const handleSubmit =(values)=>{
         login(values).then(response=>{
           console.log(response.data)
-          if(response.data.isSuccess==="true"){
-            navigate('/commonlayout/landingpage')
+           if(response.data.isSuccess==="true"){
             authservice.setAuthToken(response.data.result.token)
-                authservice.setCurrentUser(response.data.result.ExistingUser)
+            authservice.setCurrentUser(response.data.result.ExistingUser)
             toast.success(response.data.message)
+            navigate('/commonlayout/landingpage')
+           
           }
           else{
             toast.error(response.data.message)

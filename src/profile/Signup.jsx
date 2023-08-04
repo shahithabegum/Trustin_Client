@@ -1,53 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useFormik } from "formik";
 import { Col, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify'
-import { update_user } from "../../service/UserService";
-import { authservice } from '../../service/AuthService';
-import {upload} from '../../service/CompanyService'
-const Editprofile = () => {
+import { signup } from "../service/Auth";
+import ProfileValidation from './ProfileValidation';
+const Signup = () => {
     let navigate = useNavigate()
-    const user = authservice.getCurrentUser()
-    const [profileimgae, setProfileimgae] = useState('')
     const formik =useFormik({
         initialValues:{
-            username:user.username,
-            phoneno:user.phoneno,
-          email:user.email,
+            username:'',
+            phoneno:'',
+          email:'',
+          password:'',
+          confirmpassword:''
         },
-        // validationSchema:loginValidation,
+         validationSchema:ProfileValidation,
         onSubmit:(values,{resetForm})=>{
           console.log(values)
-          handleSubmit()
+          handleSubmit(values)
           resetForm();
     
       }
       })
-      const handleUpload = (e)=>{
-        let file=e.target.files[0]
-        let formdata= new FormData()
-        formdata.append("img",file)
-        upload(formdata).then(res=>{
-            console.log(res.data.result,"res")
-            let path=res.data.result.path
-            setProfileimgae(path)
-    
-            if(res.data.isSuccess==="true"){
-              
-                toast.success(res.data.message)
-               
-            }
-        })
-        
-      }
-      console.log()
-      const handleSubmit =()=>{
-        const data=Object.assign(formik.values,{profileimg:profileimgae})
-        update_user(data).then(response=>{
+      
+      const handleSubmit =(values)=>{
+        signup(values).then(response=>{
           console.log(response.data)
           if(response.data.isSuccess==="true"){
-            navigate('/commonlayout/landingpage')
+            navigate('/')
             toast.success(response.data.message)
           }
           else{
@@ -55,22 +36,19 @@ const Editprofile = () => {
           }
         })
       }
-      const handleCancel =()=>{
-        navigate('/commonlayout/landingpage')
-    }
   return (
-    <div className="">
-          <h1 className="text-center  pt-3">Edit Profile</h1>
+    <div className="logincontainer">
+          <h1 className="text-center log-h1 pt-3">Sign Up</h1>
           <div className="formcontainer  my-3">
             <form className="form ml-5" onSubmit={formik.handleSubmit}>
             <Row className='my-1'>
                 <Col  >
                   <div class="form-group">
-                    <label for="username" className="label my-1 company-label">User Name</label>
+                    <label for="username" className="label my-1">User Name</label>
                     <input
                    
                       type="text"
-                      className="form-control "
+                      className="form-control login-input"
                       id="username"
                       name="usernamei"
                       placeholder="Enter Your Name"
@@ -86,11 +64,11 @@ const Editprofile = () => {
               <Row className='my-1'>
                 <Col  >
                   <div class="form-group">
-                    <label for="email" className="label my-1 company-label">Email Id</label>
+                    <label for="email" className="label my-1">Email Id</label>
                     <input
                    
                       type="email"
-                      className="form-control "
+                      className="form-control login-input"
                       id="email"
                       name="emailid"
                       placeholder="Enter Mail Id"
@@ -106,11 +84,11 @@ const Editprofile = () => {
               <Row className='my-1'>
                 <Col  >
                   <div class="form-group">
-                    <label for="phoneno" className="label my-1 company-label">Phone Number</label>
+                    <label for="phoneno" className="label my-1">Phone Number</label>
                     <input
                    
                       type="text"
-                      className="form-control "
+                      className="form-control login-input"
                       id="phoneno"
                       name="phonenoid"
                       placeholder="Enter Mail Id"
@@ -123,13 +101,13 @@ const Editprofile = () => {
       
                 </Col>
               </Row>
-              {/* <Row className='my-1'>
+              <Row className='my-1'>
                 <Col>
                   <div class="form-group">
-                    <label for="password" className="label my-1 company-label">Password</label>
+                    <label for="password" className="label my-1">Password</label>
                     <input 
                       type="password"
-                      className="form-control "
+                      className="form-control login-input"
                       id="password"
                       placeholder="Enter Password"
                       {...formik.getFieldProps("password")}
@@ -143,10 +121,10 @@ const Editprofile = () => {
               <Row className='my-1'>
                 <Col>
                   <div class="form-group">
-                    <label for="confirmpassword" className="label my-1 company-label">Confirm Password</label>
+                    <label for="confirmpassword" className="label my-1">Confirm Password</label>
                     <input 
                       type="password"
-                      className="form-control "
+                      className="form-control login-input"
                       id="confirmpassword"
                       placeholder="Enter confirmpassword"
                       {...formik.getFieldProps("confirmpassword")}
@@ -156,36 +134,21 @@ const Editprofile = () => {
                        <p style={{color:"red"}}>{formik.errors.confirmpassword}</p>
                       ) : null}
                 </Col>
-              </Row> */}
-              <Row className='my-2'>
-                  <Col>
-                    <div class="form-group">
-                      <label for="corvepic" className="label my-2 company-label">Cover Pic</label>
-                      <input 
-                        type="file"
-                        className="form-control "
-                        id="corvepic" 
-                        name='img'
-                        onChange={(e)=>{handleUpload(e)}}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-                <Row className=" mx-2 my-1 justify-content-center" >
-                  <Col lg={4} md={6} sm={12} ml={0} >
-                  <button className="btn btn-outline-info w-100  my-2" type="submit">Update</button>
-                  </Col>
-                  <Col lg={4} md={6} sm={12} ml={0} >
-                  <button className="btn btn-outline-danger w-100  my-2" type="button" onClick={()=>handleCancel()}>Cancel</button>
-                 
-                  </Col>
-            </Row>
+              </Row>
+              <Row  className="mb-3 ">
+                <Col lg={12} md={12} sm={12} className="text-end">
+                  <Link to="/" className="link "> If your a new user signup </Link>
+                </Col>
+              </Row>
+              <Row>
+              <Col >
+                  <button className="btn  btn-primary " >Submit</button>
+                </Col>
+              </Row>
             </form>
           </div>
         </div>
   )
 }
 
-
-
-export default Editprofile
+export default Signup

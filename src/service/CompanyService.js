@@ -10,9 +10,15 @@ const getAll_company = ()=>{
  const getbyuser_company = (id)=>{
     return axios.get(BASE_API_URL+`/getbyuser/${id}`)
  }
+ const connect_company = (useremail,data)=>{
+   return axios.put(BASE_API_URL+`/network/${useremail}`,data)
+}
+const update_company = (id,data)=>{
+   return axios.put(BASE_API_URL+`/update/${id}`,data)
+}
  const upload = (data)=>{
    return axios.post(BASE_API_URL+`/upload`,data)
 }
 export{
-    create_company,getAll_company,getbyuser_company,upload
+    create_company,getAll_company,getbyuser_company,upload,connect_company,update_company
 }

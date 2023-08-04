@@ -11,6 +11,9 @@ const get_user = (id)=>{
 const update_user = (data)=>{
    return axios.put(BASE_API_URL+`/update`,data)
 }
+const change_Password = (data)=>{
+   return axios.patch(BASE_API_URL+`/changepassword`,data)
+}
 export{
-    getAll_user, get_user,update_user
+    getAll_user, get_user,update_user,change_Password
 }
