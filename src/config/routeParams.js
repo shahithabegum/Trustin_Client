@@ -7,9 +7,9 @@ import CreateCompany from '../components/company/CreateCompany'
 import EditCompany from '../components/company/EditCompany'
 import Adduser from '../components/adduser/Adduser'
 import Connect from '../components/connect/Connect'
-import Signup from '../profile/Signup'
-import Editprofile from '../profile/Editprofile'
-import ChangePassword from '../profile/ChangePassword'
+import Signup from '../components/profile/Signup'
+import Editprofile from '../components/profile/Editprofile'
+import ChangePassword from '../components/profile/ChangePassword'
 export const pathroute=[
     {
       path:'/',

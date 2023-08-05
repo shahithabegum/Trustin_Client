@@ -5,7 +5,7 @@ import App from './App';
 import axios from 'axios';
 import { authservice } from './service/AuthService';
 
-
+//interceptors for token configuration
 axios.interceptors.request.use(
   config=>{
     const token=authservice.getAuthToken()

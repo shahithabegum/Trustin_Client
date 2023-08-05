@@ -7,8 +7,11 @@ import {toast} from 'react-toastify'
 
 const Resetpassword = () => {
   let navigate = useNavigate()
+  //get query string
   let [searchParams,setSearchParams] = useSearchParams();
   const token=searchParams.get('token')
+  
+  //form Initial values
     const formik = useFormik({
         initialValues: {
           password: "",
@@ -21,6 +24,7 @@ const Resetpassword = () => {
     
       }
       });
+        //reset password method
       const handleSubmit =(values)=>{
         reset_password(values).then(res=>{
           console.log(res.data)
@@ -34,6 +38,7 @@ const Resetpassword = () => {
           }
         })
       }
+      //disable property setup
       const enable =formik.values.password !==""
     return(
         <div className="logincontainer">
