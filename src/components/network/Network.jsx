@@ -26,7 +26,7 @@ const Network = () => {
   const handleLogout = () => {
     authservice.handleLogout(navigate);
   };
-
+console.log(company)
   return (
     <div className="container-fluid">
       <header className="networkhead">
