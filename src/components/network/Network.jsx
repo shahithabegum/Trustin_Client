@@ -12,7 +12,7 @@ const Network = () => {
 
   useEffect(() => {
    getCompany()
-  },[company])
+  },[])
   const getCompany = ()=>{
     getbyuser_company(Authuser.email).then(res=>{
       if(res.data.isSuccess==="true"){

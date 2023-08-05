@@ -124,7 +124,7 @@ const Topbar = () => {
           <button className='btn btn-danger' onClick={()=>{handleReject(item)}} ><i class="fa fa-close"></i></button></div>:
           <div className='my-2'>
              {item.read==="unread" ? <b className='text-left my-2 mx-5'>{item.message}</b> :
-          <p className='text-left my-2 mx-5'>{item.message}</p>} 
+          <p className='text-left my-2 mx-3'>{item.message}</p>} 
          </div>}
          </li>
         ))
