@@ -33,9 +33,9 @@ const Landing = () => {
     });
   };
   //company profileimage
-  const coverimg = `https://trustin-server.onrender.com/${company.profileimgae}`;
+  const coverimg = `http://localhost:8080/${company.profileimgae}`;
   //user profileimage
-  const dpimg = `https://trustin-server.onrender.com/${user.profileimg}`;
+  const dpimg = `http://localhost:8080/${user.profileimg}`;
 
   return (
     <div>
