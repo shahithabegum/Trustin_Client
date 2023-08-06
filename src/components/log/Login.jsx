@@ -98,8 +98,8 @@ const Login = () => {
             </Col>
             <Col lg={6} md={12} sm={12} className="d-flex">
               <Link to="/signup" className="link ">
-                {" "}
-                If your a new user signup{" "}
+               
+               Your New Member ? Signup
               </Link>
             </Col>
           </Row>

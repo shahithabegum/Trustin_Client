@@ -143,8 +143,8 @@ const Signup = () => {
           <Row className="mb-3 ">
             <Col lg={12} md={12} sm={12} className="text-end">
               <Link to="/" className="link ">
-                {" "}
-                If your a new user signup{" "}
+            
+                Already a member ? LogIn
               </Link>
             </Col>
           </Row>
